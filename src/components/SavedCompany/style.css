@@ -1,0 +1,10 @@
+
+
+.saved-company__delete-btn {
+  background-image: url("./Vector.png");
+  height: 1.1em;
+  width: 1em;
+  position: absolute;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}

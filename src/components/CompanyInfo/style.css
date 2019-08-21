@@ -1,0 +1,22 @@
+.company-info__title-company {
+  border-bottom: 1px solid #DFDFDF; 
+}
+.company-info__text-company {
+  display: inline-block;
+}
+.company-info__numbers-company {
+  display: inline-block;
+    width: 13em;
+    height: fit-content;
+  background-color: #F8F8F8;
+  border-radius: 3px;
+  list-style: none;
+}
+.company-info__save-btn {
+  background: #F50634;
+border-radius: 3px;
+}
+.numbers-list__item {
+  display: flex;
+  justify-content: space-between;
+}
