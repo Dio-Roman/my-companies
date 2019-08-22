@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./style.css";
+import "./style.scss";
 
 const CompanyInfo = ({ title, address, director, inn, kpp, ogrn }) => {
   return (

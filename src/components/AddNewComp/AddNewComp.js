@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import CompanyInfo from "../CompanyInfo/CompanyInfo";
 import SavedCompany from "../SavedCompany/SavedCompany";
-import "./style.css";
+import "./style.scss";
+import { Link } from "react-router-dom";
 
 const AddNewComp = () => {
   const [list, setData] = useState([]);
   const [info, setInfo] = useState([]);
   const [savedComp, setSavedComp] = useState([]);
+
+  const MyContext = React.createContext();
 
   const sendReq = e => {
     if (e.target.value.length >= 3) {
@@ -48,25 +51,29 @@ const AddNewComp = () => {
     // isSaved()
   };
 
-  
-//   const isSaved = () => {
-// console.log(savedComp);
-    
+  //   const isSaved = () => {
+  // console.log(savedComp);
 
-//   }
+  //   }
 
   const deleteCompany = e => {
     setSavedComp([...savedComp].filter(el => el.data.inn != e.target.id));
   };
 
   return (
+  
     <div className="wrap">
+      <h1>Мои организации</h1>
       <nav className="nav">
-        <p className="nav__item">Новая организация</p>
-        <p className="nav__item">
-          Сохраненные организации
-          <span className="nav__count-saved">({savedComp.length})</span>
-        </p>
+        <Link to={`/`}>
+          <p className="nav__item nav__item_active">Новая организация</p>
+        </Link>
+        <Link to={`/saved`}>
+          <p className="nav__item">
+            Сохраненные организации
+            <span className="nav__count-saved"> ({savedComp.length})</span>
+          </p>
+        </Link>
       </nav>
       <main className="main-new-comp">
         <h3 className="main-new-comp__title">Организация или ИП</h3>
@@ -104,7 +111,7 @@ const AddNewComp = () => {
               className="company-info__save-btn"
               onClick={() => addToSaved(info)}
             >
-              {savedComp == 0 ? "Сохранить" : "Сохранено"} 
+              {savedComp == 0 ? "Сохранить" : "Сохранено"}
             </button>
           </>
         ) : null}
@@ -113,13 +120,18 @@ const AddNewComp = () => {
           <span className="plus-img__horizont-line" />
           <span className="plus-img__vertical-line" />
         </span>
-        <p>
+        <p className="main-new-comp__plus-text">
           Для добавления новой организации введите ее название, ИНН или адрес.
         </p>
       </main>
 
-      <SavedCompany savedList={savedComp} deleteCompany={deleteCompany} />
+      
+              <SavedCompany  savedList={savedComp} deleteCompany={deleteCompany}/>
+
+      
+
     </div>
+    
   );
 };
 

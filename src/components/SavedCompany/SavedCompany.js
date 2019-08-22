@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./style.css";
+import React, { useState,    } from "react";
+import "./style.scss";
 
 const SavedCompany = ({ savedList, deleteCompany }) => {
   const [more, setMore] = useState(false);
@@ -7,6 +7,8 @@ const SavedCompany = ({ savedList, deleteCompany }) => {
   const toggle = () => {
     setMore(!more);
   };
+  
+  // const value = useContext(MyContext);
 
   return (
     <>
