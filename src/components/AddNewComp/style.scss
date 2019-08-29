@@ -1,72 +1,69 @@
-.wrap {
-  margin: 0 auto;
-  width: 60%;
 
-}
 .main-new-comp {
-  /* margin: 0 auto;
-  width: 60%; */
-  height: 70vh;
-  background-color: #FFFFFF;
+//   /* margin: 0 auto;
+//   width: 60%; */
+//   height: 70vh;
+//   background-color: #FFFFFF;
+position: relative;
 }
-.nav {
-  display: flex;
 
-}
-.nav__item {
-  margin: 0 ;
-  padding: 0.7em 2em;
-  font-family: Verdana;
-  color: #B9B9B9;
-}
-.nav__item_active {
-  background-color: #FFFFFF;
-  border-top: 2px solid #F50634;
-  color: #2B2829;
-}
-.nav__count-saved {
-  color: #505050;
-}
+
 .main-new-comp__title {
   margin-top: 0;
 }
 .main-new-comp__input {
-  margin: 0 2em;
+  // margin: 0 2em;
+  height: 3em;
   width: -webkit-fill-available;
+  padding-left: 1em;
+  border: 1px solid #E5E5E5;
+    border-radius: 3px;
+}
+.main-new-comp__input::placeholder {
+  color: #B9B9B9;
+}
+.main-new-comp__input:focus {
+  outline-color:  #FAE29F;
 }
 
-.plus-img {
-  position: relative;
-  display: inline-block;
+
+.main-new-comp__list {
+padding-left: 0;
+margin-top: 0;
+    border-top: none;
+  border: 1px solid #E5E5E5;
   box-sizing: border-box;
-  width: 50px;
-  height: 50px;
-  border: 4px solid #DFDFDF;
-  border-radius: 50%;
-
-  &__horizont-line {
-  display: block;
-  margin: 40% auto;
-  width: 25px;
-  height: 4px;
-background-color: #DFDFDF;
+  border-radius: 0px 0px 3px 3px;
+  list-style: none;
 }
-&__vertical-line {
+.list__item {
+  padding-left: 2em;
+  padding-top: 5px;
+  padding-bottom: 5px;
+cursor: pointer;
+}
+
+.list__item:hover {
+
+  background: #F8F8F8;
+}
+.list-item__h6 {
+  display: inline;
+}
+
+.info-wrap {
   position: absolute;
-  top: 0;
-  left: 8px;
-  display: block;
-  margin: 40% auto;
-  width: 25px;
-  height: 4px;
-background-color: #DFDFDF;
-transform: rotate(90deg);
+  top: 24%;
+  background-color: #ffffff;
 }
-}
-.main-new-comp__plus-text {
 
-  display: inline-block;
-  width: 35%;
-  margin: 0;
-    vertical-align: top;
+.save-btn {
+  padding: 1em 2em;
+  background: #f50634;
+
+  border-radius: 3px;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
+

@@ -1,10 +1,70 @@
+.saved-company {
+  position: relative;
+  margin-bottom: 1.5em;
+  padding-top: 1em;
+  border: 1px solid #DFDFDF;
+box-sizing: border-box;
+border-radius: 3px;
+
+ &__title-company {
+   display: inline;
+
+ }
+}
 
 
 .saved-company__delete-btn {
   background-image: url("./Vector.png");
-  height: 1.1em;
-  width: 1em;
-  position: absolute;
+  height: 1.8em;
+  width: 1.6em;
+  // position: absolute;
   background-repeat: no-repeat;
   cursor: pointer;
+  background-color: white;
+  border: none;
+  vertical-align: middle;
+  float: right;
+  margin-top: 4px;
+  margin-right: 1em;
+}
+.saved-company__more-btn {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    outline: none;
+}
+
+.numbers-list__item p {
+
+  margin-left: 0;
+}
+
+.arrow-pic {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  margin-left: 1em;
+  transform: rotate3d(2, 1, 2, -67deg);
+
+}
+.arrow-pic_down {
+  border-left: 2px solid #777777;
+  border-bottom: 2px solid #777777;
+
+}
+.arrow-pic_up {
+  border-right: 2px solid #777777;
+  border-top: 2px solid #777777;
+  vertical-align: bottom;
+  margin-bottom: -3px;
+}
+
+
+
+.text-company__p {
+  color: #777777;
 }

@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import CompanyInfo from "../CompanyInfo/CompanyInfo";
 import SavedCompany from "../SavedCompany/SavedCompany";
+import PlusBlock from "../PlusBlock/PlusBlock";
+import Nav from "../Nav/Nav";
+
 import "./style.scss";
 import { Link } from "react-router-dom";
+import { Promise } from "q";
+import { resolve } from "path";
 
-const AddNewComp = () => {
-  const [list, setData] = useState([]);
+const AddNewComp = ({ savedComp, addToSaved, deleteCompany }) => {
+  const [list, setList] = useState([]);
   const [info, setInfo] = useState([]);
-  const [savedComp, setSavedComp] = useState([]);
-
-  const MyContext = React.createContext();
+  // const [savedComp, setSavedComp] = useState([]);
 
   const sendReq = e => {
+    setInfo([]);
     if (e.target.value.length >= 3) {
       fetch(
         `https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party`,
@@ -32,7 +36,7 @@ const AddNewComp = () => {
           return data.json();
         })
         .then(data => {
-          setData(data.suggestions);
+          setList(data.suggestions);
         })
         .catch(err => {
           console.error(err);
@@ -44,94 +48,93 @@ const AddNewComp = () => {
   const showInfo = e => {
     let aboutComp = list.filter(el => el.data.inn == e.target.id);
     setInfo(aboutComp);
+    if (info.length != 0) {setList([])}
+    ;
+
+    // ----
+
+    // let promise = new Promise((res, rej)=>{
+    //   setInfo(aboutComp)
+    //   if(info.length !=0) {resolve (info.length)}
+
+    // }).then (setData([]))
+
+    // .then(document.querySelector("#company").value = aboutComp[0].value)
   };
 
-  const addToSaved = info => {
-    setSavedComp([...savedComp, ...info]);
-    // isSaved()
-  };
+  // const autoComplete = (aboutComp) => {
+  // setSavedComp([...savedComp, ...info]);
+  // document.querySelector("#company").value = aboutComp[0].value;
+  // console.log(info[0].value)
+  // };
 
-  //   const isSaved = () => {
-  // console.log(savedComp);
-
-  //   }
-
-  const deleteCompany = e => {
-    setSavedComp([...savedComp].filter(el => el.data.inn != e.target.id));
-  };
+  // const clearData = () => {
+  //   setData([]);
+  // };
 
   return (
-  
-    <div className="wrap">
-      <h1>Мои организации</h1>
-      <nav className="nav">
-        <Link to={`/`}>
-          <p className="nav__item nav__item_active">Новая организация</p>
-        </Link>
-        <Link to={`/saved`}>
-          <p className="nav__item">
-            Сохраненные организации
-            <span className="nav__count-saved"> ({savedComp.length})</span>
-          </p>
-        </Link>
-      </nav>
-      <main className="main-new-comp">
-        <h3 className="main-new-comp__title">Организация или ИП</h3>
-        <label>
-          <input
-            className="main-new-comp__input"
-            id="company"
-            type="text"
-            name="company"
-            placeholder="Введите название, ИНН или адрес организации"
-            autoComplete="off"
-            onChange={sendReq}
-          />
-        </label>
+    <>
+      <h3 className="main-new-comp__title">Организация или ИП</h3>
+      <label>
+        <input
+          className="main-new-comp__input"
+          id="company"
+          type="text"
+          name="company"
+          placeholder="Введите название, ИНН или адрес организации"
+          autoComplete="off"
+          onChange={sendReq}
+        />
+      </label>
 
-        <ul className="main-new-comp__list">
+      {list.length != 0 ? (
+        <ul className="main-new-comp__list list">
           {list.map(el => (
-            <li key={el.data.inn} id={el.data.inn} onClick={e => showInfo(e)}>
-              {el.value}
+            <li
+              key={el.data.inn}
+              className="list__item"
+              id={el.data.inn}
+              onClick={e => showInfo(e)}
+            >
+              <h6 className="list-item__h6">{el.value}</h6>
+              <p>
+                {el.data.inn}
+                {/* <span>  </span> 
+              {'  '}  */}
+                г.{el.data.address.data.city}
+              </p>
             </li>
           ))}
         </ul>
+      ) : (
+        <PlusBlock />
+      )}
 
-        {info.length == 1 ? (
-          <>
-            <CompanyInfo
-              title={info[0].value}
-              address={info[0].data.address.value}
-              director={info[0].data.management.name}
-              inn={info[0].data.inn}
-              kpp={info[0].data.kpp}
-              ogrn={info[0].data.ogrn}
-            />
+      {info.length == 1 ? (
+        <section className="info-wrap">
+          <CompanyInfo
+            title={info[0].value}
+            postalCode={info[0].data.address.data.postal_code}
+            address={info[0].data.address.value}
+            director={info[0].data.management.name}
+            inn={info[0].data.inn}
+            kpp={info[0].data.kpp}
+            ogrn={info[0].data.ogrn}
+            // clearData={clearData}
+          />
+          {savedComp.some(el => el.data.inn == info[0].data.inn) ? (
+            <p><span>&#10004;</span>Сохранено</p>
+          ) : (
             <button
-              className="company-info__save-btn"
+              className="save-btn"
               onClick={() => addToSaved(info)}
             >
-              {savedComp == 0 ? "Сохранить" : "Сохранено"}
+              Сохранить
             </button>
-          </>
-        ) : null}
-
-        <span className="plus-img">
-          <span className="plus-img__horizont-line" />
-          <span className="plus-img__vertical-line" />
-        </span>
-        <p className="main-new-comp__plus-text">
-          Для добавления новой организации введите ее название, ИНН или адрес.
-        </p>
-      </main>
-
-      
-              <SavedCompany  savedList={savedComp} deleteCompany={deleteCompany}/>
-
-      
-
-    </div>
-    
+          )}
+        </section>
+      ) : null}
+    </>
   );
 };
 

@@ -1,13 +1,15 @@
-import React, { Component } from "react";
+import React, { useEffect  } from "react";
 import "./style.scss";
 
-const CompanyInfo = ({ title, address, director, inn, kpp, ogrn }) => {
+const CompanyInfo = ({ title, postalCode, address, director, inn, kpp, ogrn,  }) => {
+
+
   return (
     <div className="company-info">
       <h3 className="company-info__title-company">{title}</h3>
       <section className="company-info__text-company">
         <h6>Юридический адрес</h6>
-        <p>{address}</p>
+        <p>{postalCode},  {address}</p>
         <h6>Генеральный директор</h6>
         <p>{director}</p>
       </section>

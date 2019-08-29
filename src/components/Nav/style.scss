@@ -1,0 +1,27 @@
+.nav {
+  display: flex;
+
+&__item {
+  margin: 0 ;
+  padding: 0.7em 2em;
+  font-family: Verdana;
+  color: #B9B9B9;
+
+
+}
+
+}
+  .nav__item_active {
+  background-color: #FFFFFF;
+  border-top: 2px solid #F50634;
+  color: #2B2829;
+}
+
+.nav__count-saved {
+  color: #505050;
+}
+
+.nav a {
+  text-decoration: none;
+}
+

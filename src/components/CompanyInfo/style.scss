@@ -1,25 +1,42 @@
 .company-info {
+  // position: absolute;
+  // top: 24%;
+  // background-color: #ffffff;
+  width: 55.5vw;
+
   &__title-company {
     border-bottom: 1px solid #dfdfdf;
   }
   &__text-company {
+    width: 75%;
     display: inline-block;
+    h6 {
+      margin-top: 0;
+    }
   }
   &__numbers-company {
     display: inline-block;
     width: 13em;
-    height: fit-content;
+    height: 5em;
     background-color: #f8f8f8;
     border-radius: 3px;
     list-style: none;
   }
-  &__save-btn {
-    background: #f50634;
-    border-radius: 3px;
-  }
+  
+}
+
+
+
+.numbers-list {
+  padding-left: 0;
+  padding-top: 1em;
+  vertical-align: top;
 }
 
 .numbers-list__item {
   display: flex;
   justify-content: space-between;
+}
+.numbers-list__item p {
+  margin: 0 1em 0 1em; 
 }
