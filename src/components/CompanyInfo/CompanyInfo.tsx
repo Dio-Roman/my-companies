@@ -1,15 +1,24 @@
-import React, { useEffect  } from "react";
+import React, { useEffect, FC } from "react";
 import "./style.scss";
+import ICompanyItem from "../../models/companyItem";
 
-const CompanyInfo = ({ title, postalCode, address, director, inn, kpp, ogrn,  }) => {
-
-
+const CompanyInfo: FC<ICompanyItem> = ({
+  title,
+  postalCode,
+  address,
+  director,
+  inn,
+  kpp,
+  ogrn
+}) => {
   return (
     <div className="company-info">
       <h3 className="company-info__title-company">{title}</h3>
       <section className="company-info__text-company">
         <h6>Юридический адрес</h6>
-        <p>{postalCode},  {address}</p>
+        <p>
+          {postalCode}, {address}
+        </p>
         <h6>Генеральный директор</h6>
         <p>{director}</p>
       </section>

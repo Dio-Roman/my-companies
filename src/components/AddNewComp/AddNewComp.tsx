@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, FC, BaseSyntheticEvent } from "react";
 import CompanyInfo from "../CompanyInfo/CompanyInfo";
 import SavedCompany from "../SavedCompany/SavedCompany";
 import PlusBlock from "../PlusBlock/PlusBlock";
@@ -6,16 +6,27 @@ import Nav from "../Nav/Nav";
 
 import "./style.scss";
 import { Link } from "react-router-dom";
-import { Promise } from "q";
-import { resolve } from "path";
+import { number } from "prop-types";
+import ICompanyItem from "../../models/companyItem";
+// import { Promise } from "q";
+// import { resolve } from "path";
 
-const AddNewComp = ({ savedComp, addToSaved, deleteCompany }) => {
-  const [list, setList] = useState([]);
-  const [info, setInfo] = useState([]);
-  // const [savedComp, setSavedComp] = useState([]);
+interface IAddNewCompProps {
+  savedComp: any;
+  addToSaved: any;
+  // deleteCompany: any;
+}
 
-  const sendReq = e => {
+const AddNewComp: FC<IAddNewCompProps> = ({ savedComp, addToSaved }) => {
+  const [list, setList] = useState<any[]>([]);
+  const [info, setInfo] = useState<any[]>([]);
+
+  const [inputText, setInput] = useState("");
+  // const inputRef = useRef<HTMLInputElement>();
+
+  const sendReq = (e: BaseSyntheticEvent) => {
     setInfo([]);
+    setInput(e.target.value);
     if (e.target.value.length >= 3) {
       fetch(
         `https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party`,
@@ -23,7 +34,9 @@ const AddNewComp = ({ savedComp, addToSaved, deleteCompany }) => {
           method: "post",
           body: JSON.stringify({
             count: 3,
-            query: document.querySelector("#company").value
+            // query: document.querySelector("#company").value
+            // query:inputRef.value
+            query: inputText
           }),
           headers: {
             "Content-type": "application/json",
@@ -40,36 +53,23 @@ const AddNewComp = ({ savedComp, addToSaved, deleteCompany }) => {
         })
         .catch(err => {
           console.error(err);
-          return Promise.resolve([]);
+          // return Promise.resolve([]);
         });
     }
   };
 
-  const showInfo = e => {
-    let aboutComp = list.filter(el => el.data.inn == e.target.id);
+  const showInfo = (e: BaseSyntheticEvent) => {
+    let aboutComp = list.filter((el: any) => el.data.inn == e.target.id);
     setInfo(aboutComp);
-    if (info.length != 0) {setList([])}
-    ;
-
-    // ----
-
-    // let promise = new Promise((res, rej)=>{
-    //   setInfo(aboutComp)
-    //   if(info.length !=0) {resolve (info.length)}
-
-    // }).then (setData([]))
-
-    // .then(document.querySelector("#company").value = aboutComp[0].value)
+    if (info.length != 0) {
+      setList([]);
+    }
   };
 
   // const autoComplete = (aboutComp) => {
   // setSavedComp([...savedComp, ...info]);
   // document.querySelector("#company").value = aboutComp[0].value;
   // console.log(info[0].value)
-  // };
-
-  // const clearData = () => {
-  //   setData([]);
   // };
 
   return (
@@ -84,12 +84,14 @@ const AddNewComp = ({ savedComp, addToSaved, deleteCompany }) => {
           placeholder="Введите название, ИНН или адрес организации"
           autoComplete="off"
           onChange={sendReq}
+          // ref={inputRef}
+          value={inputText}
         />
       </label>
 
       {list.length != 0 ? (
         <ul className="main-new-comp__list list">
-          {list.map(el => (
+          {list.map((el: any) => (
             <li
               key={el.data.inn}
               className="list__item"
@@ -122,13 +124,12 @@ const AddNewComp = ({ savedComp, addToSaved, deleteCompany }) => {
             ogrn={info[0].data.ogrn}
             // clearData={clearData}
           />
-          {savedComp.some(el => el.data.inn == info[0].data.inn) ? (
-            <p><span>&#10004;</span>Сохранено</p>
+          {savedComp.some((el: any) => el.data.inn == info[0].data.inn) ? (
+            <p>
+              <span>&#10004;</span>Сохранено
+            </p>
           ) : (
-            <button
-              className="save-btn"
-              onClick={() => addToSaved(info)}
-            >
+            <button className="save-btn" onClick={() => addToSaved(info)}>
               Сохранить
             </button>
           )}

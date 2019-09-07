@@ -1,12 +1,10 @@
-
 .main-new-comp {
-//   /* margin: 0 auto;
-//   width: 60%; */
-//   height: 70vh;
-//   background-color: #FFFFFF;
-position: relative;
+  //   /* margin: 0 auto;
+  //   width: 60%; */
+  //   height: 70vh;
+  //   background-color: #FFFFFF;
+  position: relative;
 }
-
 
 .main-new-comp__title {
   margin-top: 0;
@@ -16,22 +14,21 @@ position: relative;
   height: 3em;
   width: -webkit-fill-available;
   padding-left: 1em;
-  border: 1px solid #E5E5E5;
-    border-radius: 3px;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
 }
 .main-new-comp__input::placeholder {
-  color: #B9B9B9;
+  color: #b9b9b9;
 }
 .main-new-comp__input:focus {
-  outline-color:  #FAE29F;
+  outline-color: #fae29f;
 }
 
-
 .main-new-comp__list {
-padding-left: 0;
-margin-top: 0;
-    border-top: none;
-  border: 1px solid #E5E5E5;
+  padding-left: 0;
+  margin-top: 0;
+  border-top: none;
+  border: 1px solid #e5e5e5;
   box-sizing: border-box;
   border-radius: 0px 0px 3px 3px;
   list-style: none;
@@ -40,12 +37,11 @@ margin-top: 0;
   padding-left: 2em;
   padding-top: 5px;
   padding-bottom: 5px;
-cursor: pointer;
+  cursor: pointer;
 }
 
 .list__item:hover {
-
-  background: #F8F8F8;
+  background: #f8f8f8;
 }
 .list-item__h6 {
   display: inline;
@@ -60,10 +56,8 @@ cursor: pointer;
 .save-btn {
   padding: 1em 2em;
   background: #f50634;
-
   border-radius: 3px;
   color: white;
   border: none;
   cursor: pointer;
 }
-
