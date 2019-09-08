@@ -1,11 +1,7 @@
-import React, { useState, FC } from "react";
-import CompanyInfo from "../CompanyInfo/CompanyInfo";
-import SavedCompany from "../SavedCompany/SavedCompany";
+import React, { FC } from "react";
 import "./style.scss";
-import { NavLink, RouteComponentProps } from "react-router-dom";
-import { type } from "os";
+import { NavLink } from "react-router-dom";
 import ICompanyItem from "../../models/companyItem";
-// import INavProps from "../../models/INavProps";
 
 interface INavProps {
   savedComp: ICompanyItem[];

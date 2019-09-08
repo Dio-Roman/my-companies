@@ -1,4 +1,4 @@
-import React, { useEffect, FC } from "react";
+import React, { FC } from "react";
 import "./style.scss";
 import ICompanyItem from "../../models/companyItem";
 
@@ -9,17 +9,20 @@ const CompanyInfo: FC<ICompanyItem> = ({
   director,
   inn,
   kpp,
-  ogrn
+  ogrn,
 }) => {
+  
+
+
   return (
     <div className="company-info">
       <h3 className="company-info__title-company">{title}</h3>
       <section className="company-info__text-company">
-        <h6>Юридический адрес</h6>
+        <h5>Юридический адрес</h5>
         <p>
           {postalCode}, {address}
         </p>
-        <h6>Генеральный директор</h6>
+        <h5>Генеральный директор</h5>
         <p>{director}</p>
       </section>
       <ul className="company-info__numbers-company numbers-list">

@@ -1,13 +1,15 @@
 import React, { useState, FC, BaseSyntheticEvent } from "react";
-import "./style.scss";
+import SavedCompanyItem from "../SavedCompanyItem/SavedCompanyItem";
+import ICompanyItem from "../../models/companyItem";
+
 
 interface ISavedCompanyProps {
-  savedComp: any;
-  deleteCompany: any;
+  savedComp: ICompanyItem[];
+  deleteCompany(e: BaseSyntheticEvent):void;
 }
 
 const SavedCompany: FC<ISavedCompanyProps> = ({ savedComp, deleteCompany }) => {
-  const [more, setMore] = useState(false);
+  const [more, setMore] = useState<boolean>(false);
 
   const toggle = (): void => {
     setMore(!more);
@@ -16,60 +18,17 @@ const SavedCompany: FC<ISavedCompanyProps> = ({ savedComp, deleteCompany }) => {
   return (
     <>
       {savedComp.map((el: any) => (
-        <div className="saved-company" key={el.data.inn}>
-          <h3 className="saved-company__title-company">{el.value}</h3>
-          <button
-            id={el.data.inn}
-            className="saved-company__delete-btn"
-            onClick={(e: BaseSyntheticEvent) => deleteCompany(e)}
-          />
-          <ul className="saved-company__numbers-company numbers-list">
-            <li className="numbers-list__item">
-              <p>
-                <span className="text-company__p">ИНН </span>
-                {el.data.inn}
-              </p>
-            </li>
-            {more && (
-              <>
-                <li className="numbers-list__item">
-                  <p>
-                    <span className="text-company__p">КПП </span>
-                    {el.data.kpp}
-                  </p>
-                </li>
-                <li className="numbers-list__item">
-                  <p>
-                    <span className="text-company__p">ОГРН </span>
-                    {el.data.ogrn}
-                  </p>
-                </li>
-              </>
-            )}
-          </ul>
-          {more && (
-            <section className="saved-company__text-company text-company">
-              <p>
-                <span className="text-company__p">Юридический адрес </span>
-                {el.data.address.value}
-              </p>
-              <p>
-                <span className="text-company__p">Генеральный директор </span>
-                {el.data.management.name}
-              </p>
-            </section>
-          )}
-
-          <button className="saved-company__more-btn" onClick={() => toggle()}>
-            {!more ? "подробнее" : "скрыть подробности"}
-
-            <span
-              className={
-                !more ? "arrow-pic arrow-pic_down" : "arrow-pic arrow-pic_up"
-              }
-            ></span>
-          </button>
-        </div>
+        <SavedCompanyItem
+        key={el.data.inn}
+        id={el.data.inn}
+        value={el.value}
+        deleteCompany={deleteCompany}
+        inn={el.data.inn}
+        kpp={el.data.kpp}
+        ogrn={el.data.ogrn}
+        address={el.data.address.value}
+        management={el.data.management.name}
+        />
       ))}
     </>
   );

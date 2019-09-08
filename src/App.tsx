@@ -3,16 +3,13 @@ import "./app.scss";
 import AddNewComp from "./components/AddNewComp/AddNewComp";
 import SavedCompany from "./components/SavedCompany/SavedCompany";
 import Nav from "./components/Nav/Nav";
-
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  RouteComponentProps
 } from "react-router-dom";
 
 import ICompanyItem from "./models/companyItem";
-import { any } from "prop-types";
 
 function App() {
   const [savedComp, setSavedComp] = useState<ICompanyItem[]>([]);
@@ -39,7 +36,10 @@ function App() {
               exact
               path="/"
               render={() => (
-                <AddNewComp addToSaved={addToSaved} savedComp={savedComp} />
+                <AddNewComp 
+                addToSaved={addToSaved} 
+                savedComp={savedComp} 
+                />
               )}
             />
 
@@ -53,7 +53,6 @@ function App() {
                 />
               )}
             />
-            {/* <SavedCompany/> */}
           </Switch>
         </main>
       </div>

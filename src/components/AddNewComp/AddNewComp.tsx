@@ -1,28 +1,17 @@
-import React, { useState, useRef, FC, BaseSyntheticEvent } from "react";
+import React, { useState, FC, BaseSyntheticEvent } from "react";
 import CompanyInfo from "../CompanyInfo/CompanyInfo";
-import SavedCompany from "../SavedCompany/SavedCompany";
 import PlusBlock from "../PlusBlock/PlusBlock";
-import Nav from "../Nav/Nav";
-
 import "./style.scss";
-import { Link } from "react-router-dom";
-import { number } from "prop-types";
-import ICompanyItem from "../../models/companyItem";
-// import { Promise } from "q";
-// import { resolve } from "path";
 
 interface IAddNewCompProps {
   savedComp: any;
   addToSaved: any;
-  // deleteCompany: any;
 }
 
 const AddNewComp: FC<IAddNewCompProps> = ({ savedComp, addToSaved }) => {
   const [list, setList] = useState<any[]>([]);
   const [info, setInfo] = useState<any[]>([]);
-
-  const [inputText, setInput] = useState("");
-  // const inputRef = useRef<HTMLInputElement>();
+  const [inputText, setInput] = useState<string>("");
 
   const sendReq = (e: BaseSyntheticEvent) => {
     setInfo([]);
@@ -53,24 +42,19 @@ const AddNewComp: FC<IAddNewCompProps> = ({ savedComp, addToSaved }) => {
         })
         .catch(err => {
           console.error(err);
-          // return Promise.resolve([]);
         });
     }
   };
 
-  const showInfo = (e: BaseSyntheticEvent) => {
+const del = ():void => {
+  setList([]);
+}
+
+  const showInfo = (e: BaseSyntheticEvent, del:any) => {
     let aboutComp = list.filter((el: any) => el.data.inn == e.target.id);
     setInfo(aboutComp);
-    if (info.length != 0) {
-      setList([]);
-    }
+    del()
   };
-
-  // const autoComplete = (aboutComp) => {
-  // setSavedComp([...savedComp, ...info]);
-  // document.querySelector("#company").value = aboutComp[0].value;
-  // console.log(info[0].value)
-  // };
 
   return (
     <>
@@ -84,8 +68,7 @@ const AddNewComp: FC<IAddNewCompProps> = ({ savedComp, addToSaved }) => {
           placeholder="Введите название, ИНН или адрес организации"
           autoComplete="off"
           onChange={sendReq}
-          // ref={inputRef}
-          value={inputText}
+          value={info[0] ? info[0].value : inputText}
         />
       </label>
 
@@ -96,13 +79,11 @@ const AddNewComp: FC<IAddNewCompProps> = ({ savedComp, addToSaved }) => {
               key={el.data.inn}
               className="list__item"
               id={el.data.inn}
-              onClick={e => showInfo(e)}
+              onClick={e => showInfo(e, del)}
             >
               <h6 className="list-item__h6">{el.value}</h6>
               <p>
                 {el.data.inn}
-                {/* <span>  </span> 
-              {'  '}  */}
                 г.{el.data.address.data.city}
               </p>
             </li>
@@ -122,11 +103,12 @@ const AddNewComp: FC<IAddNewCompProps> = ({ savedComp, addToSaved }) => {
             inn={info[0].data.inn}
             kpp={info[0].data.kpp}
             ogrn={info[0].data.ogrn}
-            // clearData={clearData}
           />
           {savedComp.some((el: any) => el.data.inn == info[0].data.inn) ? (
             <p>
-              <span>&#10004;</span>Сохранено
+              <span>&#10004;</span>
+              <span>  </span>
+               Сохранено
             </p>
           ) : (
             <button className="save-btn" onClick={() => addToSaved(info)}>
