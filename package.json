@@ -1,6 +1,10 @@
 {
   "name": "my-companies",
   "version": "0.1.0",
+  "engines": {
+    "npm": "6.2.0",
+    "node": "10.16.0"
+  },
   "private": true,
   "dependencies": {
     "@types/jest": "^24.0.18",
