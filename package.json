@@ -7,6 +7,8 @@
     "node": "10.16.0"
   },
   "private": true,
+  "git.path": "C:\\Program Files\\Git\\bin\\git.exe",
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\bin\\sh.exe",
   "dependencies": {
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.2",
