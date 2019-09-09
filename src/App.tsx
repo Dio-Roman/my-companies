@@ -1,5 +1,5 @@
 import React, { useState, BaseSyntheticEvent } from "react";
-import "./app.scss";
+import "./app.css";
 import AddNewComp from "./components/AddNewComp/AddNewComp";
 import SavedCompany from "./components/SavedCompany/SavedCompany";
 import Nav from "./components/Nav/Nav";
