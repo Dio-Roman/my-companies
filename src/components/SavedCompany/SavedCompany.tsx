@@ -1,4 +1,4 @@
-import React, { useState, FC, BaseSyntheticEvent } from "react";
+import React, { FC, BaseSyntheticEvent } from "react";
 import SavedCompanyItem from "../SavedCompanyItem/SavedCompanyItem";
 import ICompanyItem from "../../models/companyItem";
 
@@ -9,12 +9,6 @@ interface ISavedCompanyProps {
 }
 
 const SavedCompany: FC<ISavedCompanyProps> = ({ savedComp, deleteCompany }) => {
-  const [more, setMore] = useState<boolean>(false);
-
-  const toggle = (): void => {
-    setMore(!more);
-  };
-
   return (
     <>
       {savedComp.map((el: any) => (
