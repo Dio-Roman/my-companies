@@ -3,7 +3,7 @@ import "./style.scss";
 
 interface ISavedCompanyItemProps {
   key: number;
-  id: number;
+  id: string;
   value: string;
   deleteCompany(e: BaseSyntheticEvent): void;
   inn: number;

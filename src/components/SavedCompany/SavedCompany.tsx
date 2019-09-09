@@ -14,7 +14,7 @@ const SavedCompany: FC<ISavedCompanyProps> = ({ savedComp, deleteCompany }) => {
       {savedComp.map((el: any) => (
         <SavedCompanyItem
         key={el.data.inn}
-        id={el.data.inn}
+        id={''+el.data.inn}
         value={el.value}
         deleteCompany={deleteCompany}
         inn={el.data.inn}
