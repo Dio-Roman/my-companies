@@ -6,4 +6,6 @@ export default interface ICompanyItem {
   inn: number;
   kpp: number;
   ogrn: number;
+  info: any,
+  setList: any
 }

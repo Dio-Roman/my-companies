@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import "./style.scss";
 import ICompanyItem from "../../models/companyItem";
 
@@ -10,9 +10,13 @@ const CompanyInfo: FC<ICompanyItem> = ({
   inn,
   kpp,
   ogrn,
+  info,
+  setList
 }) => {
   
-
+  useEffect(()=>{
+    setList([])
+  },[info])
 
   return (
     <div className="company-info">

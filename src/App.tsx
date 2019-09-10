@@ -14,7 +14,7 @@ import ICompanyItem from "./models/companyItem";
 function App() {
   const [savedComp, setSavedComp] = useState<ICompanyItem[]>([]);
 
-  const addToSaved = (info: any): void => {
+  const addToSaved = (info: ICompanyItem[]): void => {
     setSavedComp([...savedComp, ...info]);
   };
 
@@ -31,7 +31,6 @@ function App() {
         <Nav savedComp={savedComp} />
         <main className="main-new-comp">
           <Switch>
-            {/* <Route exact path="/" component={AddNewComp} /> */}
             <Route
               exact
               path="/"

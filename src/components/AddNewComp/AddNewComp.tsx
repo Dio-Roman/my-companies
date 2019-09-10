@@ -2,9 +2,10 @@ import React, { useState, FC, BaseSyntheticEvent } from "react";
 import CompanyInfo from "../CompanyInfo/CompanyInfo";
 import PlusBlock from "../PlusBlock/PlusBlock";
 import "./style.scss";
+import ICompanyItem from "../../models/companyItem";
 
 interface IAddNewCompProps {
-  savedComp: any;
+  savedComp: ICompanyItem[];
   addToSaved: any;
 }
 
@@ -23,8 +24,6 @@ const AddNewComp: FC<IAddNewCompProps> = ({ savedComp, addToSaved }) => {
           method: "post",
           body: JSON.stringify({
             count: 3,
-            // query: document.querySelector("#company").value
-            // query:inputRef.value
             query: inputText
           }),
           headers: {
@@ -46,14 +45,9 @@ const AddNewComp: FC<IAddNewCompProps> = ({ savedComp, addToSaved }) => {
     }
   };
 
-const del = ():void => {
-  setList([]);
-}
-
-  const showInfo = (e: BaseSyntheticEvent, del:any) => {
+  const showInfo = (e: BaseSyntheticEvent) => {
     let aboutComp = list.filter((el: any) => el.data.inn == e.target.id);
     setInfo(aboutComp);
-    del()
   };
 
   return (
@@ -79,7 +73,7 @@ const del = ():void => {
               key={el.data.inn}
               className="list__item"
               id={el.data.inn}
-              onClick={e => showInfo(e, del)}
+              onClick={e => showInfo(e)}
             >
               <h6 className="list-item__h6">{el.value}</h6>
               <p>
@@ -103,6 +97,8 @@ const del = ():void => {
             inn={info[0].data.inn}
             kpp={info[0].data.kpp}
             ogrn={info[0].data.ogrn}
+            info={info}
+            setList={setList}
           />
           {savedComp.some((el: any) => el.data.inn == info[0].data.inn) ? (
             <p>
